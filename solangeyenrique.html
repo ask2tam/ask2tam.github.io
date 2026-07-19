@@ -16,7 +16,7 @@
       window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
     }
   </script>
-  
+
   <style>
     #btn-musica {
       position: fixed;
@@ -39,7 +39,6 @@
     #btn-musica:hover { transform: scale(1.05); background-color: #555b2e; }
     #btn-musica:active { transform: scale(0.95); }
     
-    /* Estilos para el texto de personalización alineado abajo */
     .texto-personalizado {
       font-family: 'Montserrat', sans-serif;
       color: #6b7139;
@@ -50,7 +49,7 @@
 </head>
 <body>
 
-<audio id="musica-boda" src="https://melody-weave-tool.lovable.app/__l5e/assets-v1/6853efb5-ab29-4783-a33a-9189e2497331/risk-it-all.mp3" loop></audio>
+<audio id="musica-boda" src="assets/musica.mp3" loop></audio>
 
 <button id="btn-musica" aria-label="Silenciar música">
   <svg id="icon-sound-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
@@ -62,13 +61,12 @@
   <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
     <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     
-    <!-- Contenedor degradado inferior -->
-    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-12 pt-20 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/90 to-transparent">
+    <!-- CAMBIO AQUÍ: Se subió el bloque aumentando el padding inferior (pb-24) y ajustando la intensidad del degradado -->
+    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-24 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/60 to-transparent">
       
-      <!-- Contenedor unificado para texto y botón (mantiene el texto abajo con el botón) -->
       <div class="flex flex-col items-center gap-4 w-full">
         
-        <!-- Zona dinámica de texto (justo encima del botón) -->
+        <!-- Zona dinámica de texto -->
         <div class="texto-personalizado">
           <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
           <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
