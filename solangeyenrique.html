@@ -16,6 +16,9 @@
       window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
     }
   </script>
+  
+  <link rel="modulepreload" href="assets/index-CF7wd2-r.js"/>
+  <link rel="modulepreload" href="assets/routes-BI37zumD.js"/>
 
   <style>
     #btn-musica {
@@ -58,28 +61,26 @@
 
 <main class="min-h-screen w-full bg-[#efe9dc] flex justify-center">
   <!-- Portada / Dialogo -->
-  <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
+  <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] flex flex-col justify-between py-8" role="dialog" aria-label="Portada de la invitación">
     
-    <!-- AJUSTE 1: Se fuerza a que la imagen se alinee y empiece desde arriba (object-top) -->
-    <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-top object-cover"/>
+    <!-- Contenedor de la Imagen: Ahora tiene su propio espacio arriba y no se corta abajo -->
+    <div class="w-full flex-1 max-h-[60vh] px-4">
+      <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="w-full h-full object-contain rounded-2xl shadow-sm"/>
+    </div>
     
-    <!-- AJUSTE 2: Se despega del borde inferior cambiando 'bottom-0' por 'bottom-16' para darle una base alta de descanso -->
-    <div class="absolute inset-x-0 bottom-16 flex flex-col items-center pb-8 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/70 to-transparent">
+    <!-- Contenedor del Texto y Botón: Se ubica de forma natural abajo de la imagen sin encimarse -->
+    <div class="flex flex-col items-center gap-5 w-full mt-4 pb-4">
       
-      <div class="flex flex-col items-center gap-4 w-full">
-        
-        <!-- Zona dinámica de texto -->
-        <div class="texto-personalizado">
-          <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
-          <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
-        </div>
-
-        <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
-          Abrir invitación
-        </button>
-        
+      <!-- Zona dinámica de texto -->
+      <div class="texto-personalizado">
+        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 4px;"></p>
+        <p id="txt-pases" style="font-size: 13px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
       </div>
 
+      <button id="btn-abrir" class="px-8 py-2.5 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
+        Abrir invitación
+      </button>
+      
     </div>
   </div>
 
@@ -104,12 +105,12 @@
   const numeroPases = urlParams.get('pases');
 
   if (nombreInvitado) {
-    document.getElementById('txt-invitado').textContent = "Para: " + nombreInvitado;
+    document.getElementById('txt-invitado').textContent = "Invitación para: " + nombreInvitado;
   }
   
   if (numeroPases) {
-    const textoPase = numeroPases === '1' ? '(1) pase' : `(${numeroPases}) pases`;
-    document.getElementById('txt-pases').textContent = `Tenemos ${textoPase} para ti`;
+    const textoPase = numeroPases === '1' ? '1 pase' : `${numeroPases} pases`;
+    document.getElementById('txt-pases').textContent = `Válido para: ${textoPase}`;
   }
 
   const musica = document.getElementById('musica-boda');
