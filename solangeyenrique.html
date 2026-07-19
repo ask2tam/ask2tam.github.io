@@ -61,26 +61,26 @@
 
 <main class="min-h-screen w-full bg-[#efe9dc] flex justify-center">
   <!-- Portada / Dialogo -->
-  <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] flex flex-col justify-between py-8" role="dialog" aria-label="Portada de la invitación">
+  <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
+    <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     
-    <!-- Contenedor de la Imagen: Ahora tiene su propio espacio arriba y no se corta abajo -->
-    <div class="w-full flex-1 max-h-[60vh] px-4">
-      <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="w-full h-full object-contain rounded-2xl shadow-sm"/>
-    </div>
-    
-    <!-- Contenedor del Texto y Botón: Se ubica de forma natural abajo de la imagen sin encimarse -->
-    <div class="flex flex-col items-center gap-5 w-full mt-4 pb-4">
+    <!-- CAMBIO AQUÍ: Se subió el bloque aumentando el padding inferior (pb-24) y ajustando la intensidad del degradado -->
+    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-24 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/60 to-transparent">
       
-      <!-- Zona dinámica de texto -->
-      <div class="texto-personalizado">
-        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 4px;"></p>
-        <p id="txt-pases" style="font-size: 13px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
+      <div class="flex flex-col items-center gap-4 w-full">
+        
+        <!-- Zona dinámica de texto -->
+        <div class="texto-personalizado">
+          <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
+          <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
+        </div>
+
+        <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
+          Abrir invitación
+        </button>
+        
       </div>
 
-      <button id="btn-abrir" class="px-8 py-2.5 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
-        Abrir invitación
-      </button>
-      
     </div>
   </div>
 
