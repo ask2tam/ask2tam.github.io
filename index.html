@@ -6,15 +6,12 @@
   <title>Solangel &amp; Enrique · Nos casamos</title>
   <meta name="description" content="Te invitamos a nuestra boda — 05 de Setiembre, Apata, Jauja."/>
   
-  <!-- Preloads y Fuentes Esenciales -->
   <link rel="preload" as="image" href="assets/portada-se.jpg"/>
   <link rel="stylesheet" href="assets/styles-DQlqYdCA.css" data-precedence="default"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&amp;display=swap" data-precedence="default"/>
   <link rel="icon" href="https://melody-weave-tool.lovable.app/favicon.ico" type="image/x-icon"/>
 
-  <!-- Scripts de hidratación corregidos para index.html (Evita que se rompa la ruta) -->
   <script>
-    // Forzamos al enrutador a entender que index.html equivale a la raíz "/"
     if (window.location.pathname.endsWith('index.html')) {
       window.history.replaceState(null, '', window.location.pathname.replace('index.html', ''));
     }
@@ -25,8 +22,11 @@
 </head>
 <body>
 
+<!-- Elemento de audio oculto (reemplaza 'assets/musica.mp3' por tu archivo real) -->
+<audio id="musica-boda" src="https://melody-weave-tool.lovable.app/__l5e/assets-v1/6853efb5-ab29-4783-a33a-9189e2497331/risk-it-all.mp3" loop></audio>
+
 <main class="min-h-screen w-full bg-[#efe9dc] flex justify-center">
-  <!-- Portada / Dialogo (Se le añade id="portada" para manipularlo con JS) -->
+  <!-- Portada / Dialogo -->
   <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
     <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     <div class="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 pb-10 pt-16 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/70 to-transparent">
@@ -38,7 +38,6 @@
 
   <!-- Contenedor Principal de la Invitación -->
   <div class="w-full max-w-[520px] bg-[#efe9dc] h-screen overflow-hidden relative">
-    <!-- Contenedor del iframe con scroll adaptado para iOS -->
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch;">
       <iframe 
         title="Invitación Solangel &amp; Enrique" 
@@ -53,9 +52,15 @@
   </div>
 </main>
 
-<!-- Lógica básica para ocultar la portada al hacer click -->
 <script>
   document.getElementById('btn-abrir').addEventListener('click', function() {
+    // 1. Intentar reproducir la música
+    const musica = document.getElementById('musica-boda');
+    musica.play().catch(error => {
+      console.log("El navegador bloqueó el audio inicialmente:", error);
+    });
+
+    // 2. Transición para ocultar la portada
     const portada = document.getElementById('portada');
     portada.style.transition = 'opacity 0.5s ease';
     portada.style.opacity = '0';
