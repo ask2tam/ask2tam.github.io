@@ -12,6 +12,7 @@
   <link rel="icon" href="https://melody-weave-tool.lovable.app/favicon.ico" type="image/x-icon"/>
 
   <script>
+    // Limpieza segura del enrutador de JS para que no se oculte el contenido
     if (window.location.pathname.includes('.html')) {
       window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
     }
@@ -42,10 +43,12 @@
     #btn-musica:hover { transform: scale(1.05); background-color: #555b2e; }
     #btn-musica:active { transform: scale(0.95); }
     
+    /* Estilos para el texto de personalización */
     .texto-personalizado {
       font-family: 'Montserrat', sans-serif;
       color: #6b7139;
       text-align: center;
+      margin-bottom: 15px;
       padding: 0 20px;
     }
   </style>
@@ -64,18 +67,16 @@
   <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
     <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     
-    <!-- CAMBIO AQUÍ: Se subió el bloque aumentando el padding inferior (pb-24) y ajustando la intensidad del degradado -->
-    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-36 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/60 to-transparent">
+    <div class="absolute inset-x-0 bottom-5 flex flex-col items-center pb-10 pt-16 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/85 to-transparent">
       
-      <div class="flex flex-col items-center gap-4 w-full">
-        <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
-          Abrir invitación
-        </button>
-        <div class="texto-personalizado">
-          <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
-          <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
-        </div>
+      <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
+      Abrir invitación
+      </button>
+      <div class="texto-personalizado">
+        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 4px;"></p>
+        <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.9;"></p>
       </div>
+
 
     </div>
   </div>
@@ -96,19 +97,23 @@
 </main>
 
 <script>
+  // 1. LEER LOS PARÁMETROS DE LA URL
   const urlParams = new URLSearchParams(window.location.search);
   const nombreInvitado = urlParams.get('invitado');
   const numeroPases = urlParams.get('pases');
 
+  // 2. INYECTARLOS EN EL HTML SI EXISTEN
   if (nombreInvitado) {
     document.getElementById('txt-invitado').textContent = "Invitación para: " + nombreInvitado;
   }
   
   if (numeroPases) {
+    // Si es 1 pase escribe "1 pase", si son más escribe "X pases"
     const textoPase = numeroPases === '1' ? '1 pase' : `${numeroPases} pases`;
-    document.getElementById('txt-pases').textContent = `Válido para: ${textoPase}`;
+    document.getElementById('txt-pases').textContent = `Valido para: ${textoPase}`;
   }
 
+  // 3. CONTROL DE MÚSICA Y PORTADA
   const musica = document.getElementById('musica-boda');
   const btnMusica = document.getElementById('btn-musica');
   const iconOn = document.getElementById('icon-sound-on');
