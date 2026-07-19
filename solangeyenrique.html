@@ -59,10 +59,12 @@
 <main class="min-h-screen w-full bg-[#efe9dc] flex justify-center">
   <!-- Portada / Dialogo -->
   <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
-    <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     
-    <!-- CAMBIO AQUÍ: Se subió el bloque aumentando el padding inferior (pb-24) y ajustando la intensidad del degradado -->
-    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-24 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/60 to-transparent">
+    <!-- AJUSTE 1: Se fuerza a que la imagen se alinee y empiece desde arriba (object-top) -->
+    <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-top object-cover"/>
+    
+    <!-- AJUSTE 2: Se despega del borde inferior cambiando 'bottom-0' por 'bottom-16' para darle una base alta de descanso -->
+    <div class="absolute inset-x-0 bottom-16 flex flex-col items-center pb-8 pt-12 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/70 to-transparent">
       
       <div class="flex flex-col items-center gap-4 w-full">
         
