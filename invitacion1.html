@@ -19,14 +19,12 @@
     });
   </script>
   
-  <link rel="modulepreload" href="assets/index-CF7wd2-r.js"/>
-  <link rel="modulepreload" href="assets/routes-BI37zumD.js"/>
 
   <style>
-    /* Estilos para el botón flotante de música */
+    /* Estilos para el botón flotante de música en la parte inferior */
     #btn-musica {
       position: fixed;
-      top: 20px;
+      bottom: 20px; /* Cambiado de top a bottom */
       right: 20px;
       z-index: 40;
       width: 40px;
@@ -56,7 +54,7 @@
 <!-- Elemento de audio oculto -->
 <audio id="musica-boda" src="https://melody-weave-tool.lovable.app/__l5e/assets-v1/6853efb5-ab29-4783-a33a-9189e2497331/risk-it-all.mp3" loop></audio>
 
-<!-- Botón Flotante para Silenciar/Reproducir -->
+<!-- Botón Flotante para Silenciar/Reproducir (Ubicado abajo) -->
 <button id="btn-musica" aria-label="Silenciar música">
   <!-- Icono con Sonido (Predeterminado) -->
   <svg id="icon-sound-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -107,20 +105,16 @@
 
   // Acción al presionar "Abrir Invitación"
   document.getElementById('btn-abrir').addEventListener('click', function() {
-    // Intentar reproducir música
     musica.play()
       .then(() => {
-        // Si se reproduce con éxito, mostramos el botón flotante en modo activo
         btnMusica.style.display = 'flex';
       })
       .catch(error => {
         console.log("Audio bloqueado temporalmente por el navegador:", error);
-        // Aun si falla el autoplay del navegador, mostramos el botón para que puedan activarlo manualmente
         btnMusica.style.display = 'flex';
-        actualizarIconos(true); // Mostrar icono de silenciado si no pudo arrancar solo
+        actualizarIconos(true);
       });
 
-    // Desvanecer la portada
     const portada = document.getElementById('portada');
     portada.style.transition = 'opacity 0.5s ease';
     portada.style.opacity = '0';
@@ -140,7 +134,6 @@
     }
   });
 
-  // Función interna para alternar los iconos visuales
   function actualizarIconos(estaPausado) {
     if (estaPausado) {
       iconOn.style.display = 'none';
