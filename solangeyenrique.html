@@ -16,7 +16,7 @@
       window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
     }
   </script>
-
+  
   <style>
     #btn-musica {
       position: fixed;
@@ -39,19 +39,18 @@
     #btn-musica:hover { transform: scale(1.05); background-color: #555b2e; }
     #btn-musica:active { transform: scale(0.95); }
     
-    /* Estilos para el texto de personalización */
+    /* Estilos para el texto de personalización alineado abajo */
     .texto-personalizado {
       font-family: 'Montserrat', sans-serif;
       color: #6b7139;
       text-align: center;
-      margin-bottom: 15px;
       padding: 0 20px;
     }
   </style>
 </head>
 <body>
 
-<audio id="musica-boda" src="assets/musica.mp3" loop></audio>
+<audio id="musica-boda" src="https://melody-weave-tool.lovable.app/__l5e/assets-v1/6853efb5-ab29-4783-a33a-9189e2497331/risk-it-all.mp3" loop></audio>
 
 <button id="btn-musica" aria-label="Silenciar música">
   <svg id="icon-sound-on" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
@@ -63,17 +62,24 @@
   <div id="portada" class="fixed inset-0 z-50 w-full h-full bg-[#efe9dc] overflow-hidden" role="dialog" aria-label="Portada de la invitación">
     <img src="assets/portada-se.jpg" alt="Solangel &amp; Enrique" class="absolute inset-0 w-full h-full object-cover"/>
     
-    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-10 pt-16 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/85 to-transparent">
+    <!-- Contenedor degradado inferior -->
+    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-12 pt-20 bg-gradient-to-t from-[#efe9dc] via-[#efe9dc]/90 to-transparent">
       
-      <!-- Zona donde se inyectará el nombre del invitado de forma dinámica -->
-      <div class="texto-personalizado">
-        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 4px;"></p>
-        <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.9;"></p>
+      <!-- Contenedor unificado para texto y botón (mantiene el texto abajo con el botón) -->
+      <div class="flex flex-col items-center gap-4 w-full">
+        
+        <!-- Zona dinámica de texto (justo encima del botón) -->
+        <div class="texto-personalizado">
+          <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
+          <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.85;"></p>
+        </div>
+
+        <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
+          Abrir invitación
+        </button>
+        
       </div>
 
-      <button id="btn-abrir" class="px-6 py-2 rounded-full bg-[#6b7139] text-white text-xs tracking-[0.25em] uppercase shadow-xl hover:scale-105 transition animate-pulse focus:outline-none" style="font-family:'Montserrat', sans-serif" aria-label="Abrir invitación">
-        Abrir invitación
-      </button>
     </div>
   </div>
 
@@ -93,23 +99,19 @@
 </main>
 
 <script>
-  // 1. LEER LOS PARÁMETROS DE LA URL
   const urlParams = new URLSearchParams(window.location.search);
   const nombreInvitado = urlParams.get('invitado');
   const numeroPases = urlParams.get('pases');
 
-  // 2. INYECTARLOS EN EL HTML SI EXISTEN
   if (nombreInvitado) {
-    document.getElementById('txt-invitado').textContent = "Invitación para: " + nombreInvitado;
+    document.getElementById('txt-invitado').textContent = "Para: " + nombreInvitado;
   }
   
   if (numeroPases) {
-    // Si es 1 pase escribe "1 pase", si son más escribe "X pases"
-    const textoPase = numeroPases === '1' ? '1 pase' : `${numeroPases} pases`;
-    document.getElementById('txt-pases').textContent = `Valido para: ${textoPase}`;
+    const textoPase = numeroPases === '1' ? '(1) pase' : `(${numeroPases}) pases`;
+    document.getElementById('txt-pases').textContent = `Tenemos ${textoPase} para ti`;
   }
 
-  // 3. CONTROL DE MÚSICA Y PORTADA
   const musica = document.getElementById('musica-boda');
   const btnMusica = document.getElementById('btn-musica');
   const iconOn = document.getElementById('icon-sound-on');
