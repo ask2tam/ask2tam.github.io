@@ -17,9 +17,6 @@
       window.history.replaceState(null, '', '/' + window.location.search + window.location.hash);
     }
   </script>
-  
-  <link rel="modulepreload" href="assets/index-CF7wd2-r.js"/>
-  <link rel="modulepreload" href="assets/routes-BI37zumD.js"/>
 
   <style>
     #btn-musica {
@@ -73,7 +70,7 @@
       Abrir invitación
       </button>
       <div class="texto-personalizado">
-        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 0px;"></p>
+        <p id="txt-invitado" style="font-size: 16px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 2px;"></p>
         <p id="txt-pases" style="font-size: 12px; font-weight: 400; font-style: italic; opacity: 0.9;"></p>
       </div>
 
@@ -97,23 +94,19 @@
 </main>
 
 <script>
-  // 1. LEER LOS PARÁMETROS DE LA URL
+  // PARÁMETROS DE LA URL
   const urlParams = new URLSearchParams(window.location.search);
   const nombreInvitado = urlParams.get('invitado');
   const numeroPases = urlParams.get('pases');
-
-  // 2. INYECTARLOS EN EL HTML SI EXISTEN
   if (nombreInvitado) {
-    document.getElementById('txt-invitado').textContent = "Invitación para: " + nombreInvitado;
+    document.getElementById('txt-invitado').textContent = "Para: " + nombreInvitado;
   }
-  
   if (numeroPases) {
-    // Si es 1 pase escribe "1 pase", si son más escribe "X pases"
-    const textoPase = numeroPases === '1' ? '1 pase' : `${numeroPases} pases`;
-    document.getElementById('txt-pases').textContent = `Valido para: ${textoPase}`;
+    const textoPase = numeroPases === '1' ? '(1) pase' : `(${numeroPases}) pases`;
+    document.getElementById('txt-pases').textContent = `Tenemos ${textoPase} para ti`;
   }
 
-  // 3. CONTROL DE MÚSICA Y PORTADA
+  // MÚSICA Y PORTADA
   const musica = document.getElementById('musica-boda');
   const btnMusica = document.getElementById('btn-musica');
   const iconOn = document.getElementById('icon-sound-on');
